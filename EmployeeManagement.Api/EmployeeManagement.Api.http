@@ -1,0 +1,27 @@
+﻿@EmployeeManagement.Api_HostAddress = https://localhost:7154
+
+GET {{EmployeeManagement.Api_HostAddress}}/api/Employees/{managerId}
+
+###
+
+POST {{EmployeeManagement.Api_HostAddress}}/api/Employees
+Content-Type: application/json
+
+{
+  //EmployeeCreate
+}
+
+###
+
+GET {{EmployeeManagement.Api_HostAddress}}/api/Roles
+
+###
+
+POST {{EmployeeManagement.Api_HostAddress}}/api/Roles
+Content-Type: application/json
+
+[
+  0
+]
+
+###

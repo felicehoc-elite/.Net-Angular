@@ -1,0 +1,40 @@
+<div class="container">
+  <h2>Employees</h2>
+  <div class="form-group mb-3">
+    <label for="manager">Manager:</label>
+    <select class="form-control form-select" id="manager" [(ngModel)]="selectedManager" name="manager" (change)="onManagerChange()">
+      <option value="">All Managers</option>
+      <option *ngFor="let manager of managers" [value]="manager.id">{{ manager.firstName }} {{ manager.lastName }}</option>
+    </select>
+  </div>
+
+  <table class="table">
+    <thead class="table-light">
+      <tr>
+        <th>Employee ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Roles</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td><a [routerLink]="['/employees/edit', employee.id]">{{ employee.id }}</a></td>
+        <td>{{ employee.firstName }}</td>
+        <td>{{ employee.lastName }}</td>
+        <td>{{ employee.roles.join(', ') }}</td>
+        <td class="fit">
+          <div>
+            <button class="btn btn-sm btn-info" [routerLink]="['/employees/edit', employee.id]">Edit</button>
+            <button class="btn btn-sm btn-danger ms-1" (click)="deleteEmployee(employee.id)">Delete</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="text-right">
+    <button class="btn btn-primary" [routerLink]="['/employees/add']">Add New Employee</button>
+  </div>
+</div>
