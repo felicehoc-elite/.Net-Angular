@@ -51,14 +51,14 @@ public class EmployeeRepository : IEmployeeRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateEmployeeWithRolesAsync(string id, Employee employee, List<int> roleIds)
+    public async Task UpdateEmployeeWithRolesAsync(Employee employee, List<int> roleIds)
     {
         var existingEmployee = await _context.Employees.Include(_ => _.Roles)
-            .FirstOrDefaultAsync(e => e.Id == id);
+            .FirstOrDefaultAsync(e => e.Id == employee.Id);
 
         if (existingEmployee is null)
         {
-            throw new NotFoundException($"Employee {id} not found");
+            throw new NotFoundException($"Employee {employee.Id} not found");
         }
 
         existingEmployee.Roles.Clear();

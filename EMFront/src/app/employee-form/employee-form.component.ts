@@ -34,17 +34,23 @@ export class EmployeeFormComponent implements OnInit {
 
     if (id) {
       this.employeeService.getEmployee(id).subscribe((data) => {
-        this.employee = data;
+        if (data) {
+          this.employee = data;
+        }
       });
     }
 
     this.roleService.getRoles().subscribe((data) => {
-      this.roles = data;
+      if (data) {
+        this.roles = data;
+      }
     });
 
     this.employeeService.getManagers().subscribe((managers) => {
-      this.managers = managers;
-      this.hasManagers = managers.length > 0;
+      if (managers) {
+        this.managers = managers;
+        this.hasManagers = managers.length > 0;
+      }
     });
   }
 
@@ -52,27 +58,27 @@ export class EmployeeFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.apiErrors = [];
     if (id) {
-      this.employeeService.updateEmployee(id, this.employee).subscribe(
-        () => {
+      this.employeeService.updateEmployee(id, this.employee).subscribe({
+        next: () => {
           this.router.navigate(['/employees']);
         },
-        (error) => {
+        error: (error) => {
           if (error.error && error.error.errors) {
             this.apiErrors = error.error.errors;
           }
         }
-      );
+      });
     } else {
-      this.employeeService.addEmployee(this.employee).subscribe(
-        () => {
+      this.employeeService.addEmployee(this.employee).subscribe({
+        next: () => {
           this.router.navigate(['/employees']);
         },
-        (error) => {
+        error: (error) => {
           if (error.error && error.error.errors) {
             this.apiErrors = error.error.errors;
           }
         }
-      );
+      });
     }
   }
 

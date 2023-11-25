@@ -1,10 +1,7 @@
 ﻿using EmployeeManagement.Core.DTO;
 using EmployeeManagement.Core.Exceptions;
 using EmployeeManagement.Core.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace EmployeeManagement.Api.Controllers
 {
@@ -29,14 +26,22 @@ namespace EmployeeManagement.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<EmployeeCreate>> Get([FromRoute] string id)
         {
-            var employee = await _employeeService.GetAsync(id);
+            try
+            {
+                var employee = await _employeeService.GetAsync(id);
 
-            if (employee == null)
+                if (employee == null)
+                {
+                    throw new NotFoundException();
+                }
+
+                return Ok(employee);
+            }
+            catch
             {
                 return NotFound();
             }
-
-            return Ok(employee);
+            
         }
 
         /// <summary>
@@ -108,11 +113,11 @@ namespace EmployeeManagement.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> Put(string id, [FromBody] EmployeeCreate employee)
+        public async Task<ActionResult> Put([FromBody] EmployeeCreate employee)
         {
             try
             {
-                await _employeeService.UpdateEmployeeWithRolesAsync(id, employee);
+                await _employeeService.UpdateEmployeeWithRolesAsync(employee);
                 return Ok();
             }
             catch (ArgumentNullException ex)

@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagement.Core", "
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "EMFront", "EMFront\EMFront.esproj", "{DAB17A5E-BD0A-44E6-AC75-96DB8160FE98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.Test", "EmployeeManagement.Test\EmployeeManagement.Test.csproj", "{B94204D6-A0C8-4EA2-8BB4-898ABAAF2D66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{DAB17A5E-BD0A-44E6-AC75-96DB8160FE98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAB17A5E-BD0A-44E6-AC75-96DB8160FE98}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DAB17A5E-BD0A-44E6-AC75-96DB8160FE98}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B94204D6-A0C8-4EA2-8BB4-898ABAAF2D66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B94204D6-A0C8-4EA2-8BB4-898ABAAF2D66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B94204D6-A0C8-4EA2-8BB4-898ABAAF2D66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B94204D6-A0C8-4EA2-8BB4-898ABAAF2D66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{1ED60B4F-8C5C-4C5C-B37D-3875DF6C7356} = {AD82741E-56D6-4654-B42C-565377B04B07}
 		{ED6CB25E-1120-4EC2-89A4-F8E8CDE1EF12} = {AD82741E-56D6-4654-B42C-565377B04B07}
+		{B94204D6-A0C8-4EA2-8BB4-898ABAAF2D66} = {AD82741E-56D6-4654-B42C-565377B04B07}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {02201D11-01A3-479E-A1A8-D66C2B5F0E80}

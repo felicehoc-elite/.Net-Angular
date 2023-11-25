@@ -6,6 +6,7 @@ import { EmployeeService } from '../employee.service';
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.css']
 })
+
 export class EmployeeListComponent implements OnInit {
   employees: any[] = [];
   managers: any[] = [];
@@ -19,18 +20,18 @@ export class EmployeeListComponent implements OnInit {
   }
 
   loadManagers() {
-    this.employeeService.getManagers().subscribe((data) => {
+    this.employeeService.getManagers()?.subscribe((data) => {
       this.managers = data;
     });
   }
 
   loadEmployees() {
     if (this.selectedManager) {
-      this.employeeService.getEmployeesByManager(this.selectedManager).subscribe((data) => {
+      this.employeeService.getEmployeesByManager(this.selectedManager)?.subscribe((data) => {
         this.employees = data;
       });
     } else {
-      this.employeeService.getEmployees().subscribe((data) => {
+      this.employeeService.getEmployees()?.subscribe((data) => {
         this.employees = data;
       });
     }

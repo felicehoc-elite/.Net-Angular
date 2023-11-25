@@ -23,6 +23,7 @@ namespace EmployeeManagement.Core.Services
                 .Where(_ => _.Id == id)
                 .Select(_ => new EmployeeCreate()
                 {
+                    Id = id,
                     FirstName = _.FirstName,
                     LastName = _.LastName,
                     ManagerId = _.ManagerId,
@@ -66,7 +67,7 @@ namespace EmployeeManagement.Core.Services
                 .ToListAsync();
         }
 
-        public async Task UpdateEmployeeWithRolesAsync(string id, EmployeeCreate employee)
+        public async Task UpdateEmployeeWithRolesAsync(EmployeeCreate employee)
         {
             if (employee == null)
             {
@@ -74,7 +75,7 @@ namespace EmployeeManagement.Core.Services
             }
 
             await _employeeRepository
-                .UpdateEmployeeWithRolesAsync(id, employee.Entity(), employee.RoleIds.ToList());
+                .UpdateEmployeeWithRolesAsync(employee.Entity(), employee.RoleIds.ToList());
         }
 
         public async Task DeleteAsync(string id)

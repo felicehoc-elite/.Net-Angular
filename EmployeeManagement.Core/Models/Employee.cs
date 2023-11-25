@@ -12,6 +12,15 @@ namespace EmployeeManagement.Core.Models
             Roles = new List<EmployeeRole>();
         }
 
+        public Employee(string? id)
+        {
+            if (!string.IsNullOrEmpty(id))
+            {
+                Id = id;
+            }
+            Roles = new List<EmployeeRole>();
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Id { get; private set; } = IdGenerator.NewId();

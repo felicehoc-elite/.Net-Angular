@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeManagement.Core.Services
 {
-
     public class RoleService : IRoleService
     {
         private readonly IRoleRepository _roleRepository;

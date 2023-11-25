@@ -6,6 +6,6 @@ public interface IEmployeeRepository
     IQueryable<Employee> GetEmployees(string? managerId);
     Task AddAsync(Employee employee);
     Task AddEmployeeWithRolesAsync(Employee employee, List<int> roleIds);
-    Task UpdateEmployeeWithRolesAsync(string id, Employee employee, List<int> roleIds);
+    Task UpdateEmployeeWithRolesAsync(Employee employee, List<int> roleIds);
     Task DeleteAsync(string id);
 }
