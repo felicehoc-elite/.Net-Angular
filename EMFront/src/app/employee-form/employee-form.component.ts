@@ -19,6 +19,7 @@ export class EmployeeFormComponent implements OnInit {
   hasManagers: boolean = false;
   employeeId: any = null;
   apiErrors: string[] = [];
+  managerId: any = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,10 +33,13 @@ export class EmployeeFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.employeeId = id;
 
+    this.managerId = this.route.snapshot.paramMap.get('managerId');
+
     if (id) {
       this.employeeService.getEmployee(id).subscribe((data) => {
         if (data) {
           this.employee = data;
+          this.managerId = data.managerId;
         }
       });
     }
@@ -50,6 +54,11 @@ export class EmployeeFormComponent implements OnInit {
       if (managers) {
         this.managers = managers;
         this.hasManagers = managers.length > 0;
+
+        // Check if managerId is not set in the route, and select the first manager
+        if (!this.managerId && this.managers.length > 0) {
+          this.managerId = this.managers[0].id;
+        }
       }
     });
   }

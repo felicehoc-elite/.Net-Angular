@@ -24,11 +24,11 @@ namespace EmployeeManagement.Test.Employees
         {
             // Arrange
             var existingEmployeeId = "1";
-            _mockEmployeeService.Setup(service => service.GetAsync(existingEmployeeId))
-                .ReturnsAsync(new EmployeeCreate { Id = existingEmployeeId });
+            _mockEmployeeService.Setup(service => service.GetEmployeeForEditAsync(existingEmployeeId))
+                .ReturnsAsync(new EmployeeEdit { Id = existingEmployeeId });
 
             // Act
-            var result = await _employeeController.Get(existingEmployeeId);
+            var result = await _employeeController.GetEmployeeForEdit(existingEmployeeId);
 
             // Assert
             Assert.IsNotNull(result);
@@ -40,12 +40,12 @@ namespace EmployeeManagement.Test.Employees
         {
             // Arrange
             var existingEmployeeId = "1";
-            var employeeData = new EmployeeCreate { Id = existingEmployeeId, /* other employee data */ };
-            _mockEmployeeService.Setup(service => service.GetAsync(existingEmployeeId))
+            var employeeData = new EmployeeEdit { Id = existingEmployeeId, /* other employee data */ };
+            _mockEmployeeService.Setup(service => service.GetEmployeeForEditAsync(existingEmployeeId))
                 .ReturnsAsync(employeeData);
 
             // Act
-            var result = await _employeeController.Get(existingEmployeeId);
+            var result = await _employeeController.GetEmployeeForEdit(existingEmployeeId);
 
             // Assert
             Assert.IsNotNull(result);
@@ -53,15 +53,14 @@ namespace EmployeeManagement.Test.Employees
 
             var okResult = result.Result as OkObjectResult;
             Assert.IsNotNull(okResult.Value);
-            Assert.IsInstanceOf<EmployeeCreate>(okResult.Value);
-            // Add more assertions as needed
+            Assert.IsInstanceOf<EmployeeEdit>(okResult.Value);
         }
 
         [Test]
         public async Task GetList_ShouldReturnNotFoundResultWhenNoEmployeesExist()
         {
             // Arrange
-            _mockEmployeeService.Setup(service => service.GetAllAsync(null))
+            _mockEmployeeService.Setup(service => service.GetEmployeesAsync(null))
                 .ReturnsAsync(new List<EmployeeView>());
 
             // Act
@@ -94,12 +93,12 @@ namespace EmployeeManagement.Test.Employees
         public async Task Get_ExistingEmployeeId_ShouldReturnExpectedResult(string employeeId, bool expectedResult)
         {
             // Arrange
-            var employeeResult = expectedResult ? new EmployeeCreate() { Id = employeeId } : null;
-            _mockEmployeeService.Setup(service => service.GetAsync(employeeId))
+            var employeeResult = expectedResult ? new EmployeeEdit() { Id = employeeId } : null;
+            _mockEmployeeService.Setup(service => service.GetEmployeeForEditAsync(employeeId))
                 .ReturnsAsync(employeeResult);
 
             // Act
-            var result = await _employeeController.Get(employeeId);
+            var result = await _employeeController.GetEmployeeForEdit(employeeId);
 
             // Assert
             if (expectedResult)

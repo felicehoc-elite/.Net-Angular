@@ -15,7 +15,7 @@ export class EmployeeService {
   }
 
   getEmployee(id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+    return this.http.get<any>(`${this.apiUrl}/edit/${id}`);
   }
 
   getManagers(): Observable<any[]> {

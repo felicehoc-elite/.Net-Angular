@@ -36,7 +36,7 @@ namespace EmployeeManagement.Test.Employees
             var employeeController = new EmployeeController(employeeService);
 
             // Act
-            var result = await employeeController.Get(existingEmployeeId);
+            var result = await employeeController.GetEmployeeForEdit(existingEmployeeId);
 
             // Assert
             Assert.IsNotNull(result);
@@ -54,7 +54,7 @@ namespace EmployeeManagement.Test.Employees
             var employeeController = new EmployeeController(employeeService);
 
             // Act
-            var result = await employeeController.Get(nonExistingEmployeeId);
+            var result = await employeeController.GetEmployeeForEdit(nonExistingEmployeeId);
 
             // Assert
             Assert.IsNotNull(result);
@@ -105,13 +105,13 @@ namespace EmployeeManagement.Test.Employees
             _context.Employees.Add(employee);
             _context.SaveChanges();
 
-            var updatedEmployee = new EmployeeCreate { Id = existingEmployeeId, FirstName = "UpdatedJohn", LastName = "Doe" };
+            var updatedEmployee = new EmployeeEdit { Id = existingEmployeeId, FirstName = "UpdatedJohn", LastName = "Doe" };
             var employeeService = new EmployeeService(new EmployeeRepository(_context));
             var employeeController = new EmployeeController(employeeService);
 
             // Act
             var result = await employeeController.Put(updatedEmployee);
-            var getResult = await employeeController.Get(existingEmployeeId);
+            var getResult = await employeeController.GetEmployeeForEdit(existingEmployeeId);
 
             // Assert
             Assert.IsNotNull(result);

@@ -11,9 +11,9 @@
     </div>
     <div class="form-group">
       <label for="managerId">Manager:</label>
-      <select class="form-control form-select" id="managerId" [(ngModel)]="employee.managerId" name="managerId">
-        <option *ngIf="!hasManagers" value="" [selected]="!employee.managerId">No Manager</option>
-        <option *ngFor="let manager of managers" [value]="manager.id" [selected]="employee.managerId === manager.id">
+      <select class="form-control form-select" id="managerId" [(ngModel)]="managerId" name="managerId" [disabled]="employeeId !== null">
+        <option *ngIf="!hasManagers" value="" [selected]="!managerId">No Manager</option>
+        <option *ngFor="let manager of managers" [value]="manager.id" [selected]="managerId === manager.id">
           {{ manager.firstName }} {{ manager.lastName }}
         </option>
       </select>

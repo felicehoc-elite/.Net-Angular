@@ -40,7 +40,7 @@ namespace EmployeeManagement.Test.Employees
         {
             // Arrange
             string id = "1";
-            EmployeeCreate nullEmployee = null;
+            EmployeeEdit nullEmployee = null;
 
             // Act & Assert
             Assert.ThrowsAsync<ArgumentNullException>(async () =>

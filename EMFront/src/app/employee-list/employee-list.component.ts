@@ -20,32 +20,40 @@ export class EmployeeListComponent implements OnInit {
   }
 
   loadManagers() {
-    this.employeeService.getManagers()?.subscribe((data) => {
-      this.managers = data;
+    this.employeeService.getManagers()?.subscribe({
+      next: (data) => {
+        this.managers = data;
+      },
+      error: () => {
+        this.managers = [];
+      }
     });
   }
 
   loadEmployees() {
     if (this.selectedManager) {
-      this.employeeService.getEmployeesByManager(this.selectedManager)?.subscribe((data) => {
-        this.employees = data;
+      this.employeeService.getEmployeesByManager(this.selectedManager)?.subscribe({
+        next: (data) => {
+          this.employees = data;
+        },
+        error: () => {
+          this.employees = [];
+        }
       });
     } else {
-      this.employeeService.getEmployees()?.subscribe((data) => {
-        this.employees = data;
+      this.employeeService.getEmployees()?.subscribe({
+        next: (data) => {
+          this.employees = data;
+        },
+        error: () => {
+          this.employees = [];
+        }
       });
     }
   }
 
   onManagerChange() {
     this.loadEmployees();
-  }
-
-  deleteEmployee(id: string) {
-    this.employeeService.deleteEmployee(id).subscribe(() => {
-      this.loadManagers();
-      this.loadEmployees();
-    });
   }
 }
 

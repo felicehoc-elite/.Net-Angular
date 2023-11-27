@@ -3,7 +3,7 @@
   <div class="form-group mb-3">
     <label for="manager">Manager:</label>
     <select class="form-control form-select" id="manager" [(ngModel)]="selectedManager" name="manager" (change)="onManagerChange()">
-      <option value="">All Managers</option>
+      <option value="">All Employees</option>
       <option *ngFor="let manager of managers" [value]="manager.id">{{ manager.firstName }} {{ manager.lastName }}</option>
     </select>
   </div>
@@ -27,7 +27,6 @@
         <td class="fit">
           <div>
             <button class="btn btn-sm btn-info" [routerLink]="['/employees/edit', employee.id]">Edit</button>
-            <button class="btn btn-sm btn-danger ms-1" (click)="deleteEmployee(employee.id)">Delete</button>
           </div>
         </td>
       </tr>
@@ -35,6 +34,6 @@
   </table>
 
   <div class="text-right">
-    <button class="btn btn-primary" [routerLink]="['/employees/add']">Add New Employee</button>
+    <button class="btn btn-primary" [routerLink]="['/employees/add', selectedManager ]">Add New Employee</button>
   </div>
 </div>

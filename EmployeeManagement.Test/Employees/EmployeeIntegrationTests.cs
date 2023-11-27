@@ -29,30 +29,30 @@ namespace EmployeeManagement.Test.Employees
         }
 
         [Test]
-        public async Task GetAsync_ExistingEmployeeId_ShouldReturnEmployeeCreate()
+        public async Task GetEmployeeForEditAsync_ExistingEmployeeId_ShouldReturnEmployeeCreate()
         {
             // Arrange
             var existingEmployeeId = IdGenerator.NewId();
             var employees = new List<Employee>
-        {
-            new Employee(existingEmployeeId) { FirstName = "John", LastName = "Doe" }
-        };
+            {
+                new Employee(existingEmployeeId) { FirstName = "John", LastName = "Doe" }
+            };
 
             _dbContext.Employees.AddRange(employees);
             _dbContext.SaveChanges();
 
             // Act
-            var result = await _employeeService.GetAsync(existingEmployeeId);
+            var result = await _employeeService.GetEmployeeForEditAsync(existingEmployeeId);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOf<EmployeeCreate>(result);
+            Assert.IsInstanceOf<EmployeeEdit>(result);
 
             ClearEmployees();
         }
 
         [Test]
-        public async Task GetListAsync_ShouldReturnListOfEmployeeViews()
+        public async Task GetEmployeesAsync_ShouldReturnListOfEmployeeViews()
         {
             Console.Write($"{IdGenerator.NewId()} = {IdGenerator.NewId()} = {IdGenerator.NewId()}");
 
@@ -68,7 +68,7 @@ namespace EmployeeManagement.Test.Employees
             await _dbContext.SaveChangesAsync();
 
             // Act
-            var result = await _employeeService.GetAllAsync(null);
+            var result = await _employeeService.GetEmployeesAsync(null);
 
             // Assert
             Assert.IsNotNull(result);
@@ -101,7 +101,7 @@ namespace EmployeeManagement.Test.Employees
             _dbContext.Employees.Add(existingEmployee);
             _dbContext.SaveChanges();
 
-            var updatedEmployee = new EmployeeCreate 
+            var updatedEmployee = new EmployeeEdit
                 { Id = existingEmployeeId, FirstName = "UpdatedJohn", LastName = "Doe" };
 
             // Act

@@ -21,14 +21,14 @@ namespace EmployeeManagement.Api.Controllers
         /// </summary>
         /// <param name="id">The employee ID.</param>
         /// <returns>Employee.</returns>
-        [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EmployeeCreate))]
+        [HttpGet("edit/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EmployeeEdit))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<EmployeeCreate>> Get([FromRoute] string id)
+        public async Task<ActionResult<EmployeeEdit>> GetEmployeeForEdit([FromRoute] string id)
         {
             try
             {
-                var employee = await _employeeService.GetAsync(id);
+                var employee = await _employeeService.GetEmployeeForEditAsync(id);
 
                 if (employee == null)
                 {
@@ -54,7 +54,7 @@ namespace EmployeeManagement.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<EmployeeView>>> GetList([FromRoute] string? managerId)
         {
-            var employees = await _employeeService.GetAllAsync(managerId);
+            var employees = await _employeeService.GetEmployeesAsync(managerId);
 
             if (employees.Any())
             {
@@ -113,7 +113,7 @@ namespace EmployeeManagement.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> Put([FromBody] EmployeeCreate employee)
+        public async Task<ActionResult> Put([FromBody] EmployeeEdit employee)
         {
             try
             {

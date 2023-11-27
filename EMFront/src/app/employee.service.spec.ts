@@ -43,7 +43,7 @@ describe('EmployeeService', () => {
       expect(data).toEqual(employee);
     });
 
-    const req = httpTestingController.expectOne('/api/employees/1');
+    const req = httpTestingController.expectOne('/api/employees/edit/1');
     expect(req.request.method).toEqual('GET');
     req.flush(employee);
   });

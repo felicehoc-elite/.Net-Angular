@@ -17,11 +17,11 @@ namespace EmployeeManagement.Core.Services
             _employeeRepository = employeeRepository;
         }
 
-        public async Task<EmployeeCreate> GetAsync(string id)
+        public async Task<EmployeeEdit> GetEmployeeForEditAsync(string id)
         {
             var employee = await _employeeRepository.GetEmployees(null).Include(_ => _.Roles)
                 .Where(_ => _.Id == id)
-                .Select(_ => new EmployeeCreate()
+                .Select(_ => new EmployeeEdit()
                 {
                     Id = id,
                     FirstName = _.FirstName,
@@ -39,7 +39,7 @@ namespace EmployeeManagement.Core.Services
             return employee;
         }
 
-        public async Task<List<EmployeeView>> GetAllAsync(string? managerId)
+        public async Task<List<EmployeeView>> GetEmployeesAsync(string? managerId)
         {
             return await _employeeRepository.GetEmployees(managerId)
                 .Include(_ => _.Roles)
@@ -67,7 +67,7 @@ namespace EmployeeManagement.Core.Services
                 .ToListAsync();
         }
 
-        public async Task UpdateEmployeeWithRolesAsync(EmployeeCreate employee)
+        public async Task UpdateEmployeeWithRolesAsync(EmployeeEdit employee)
         {
             if (employee == null)
             {

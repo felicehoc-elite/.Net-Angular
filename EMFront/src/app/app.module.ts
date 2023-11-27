@@ -10,7 +10,7 @@ import { EmployeeFormComponent } from './employee-form/employee-form.component';
 
 const appRoutes: Routes = [
   { path: 'employees', component: EmployeeListComponent },
-  { path: 'employees/add', component: EmployeeFormComponent },
+  { path: 'employees/add/:managerId', component: EmployeeFormComponent },
   { path: 'employees/edit/:id', component: EmployeeFormComponent },
   { path: '', redirectTo: '/employees', pathMatch: 'full' },
 ];
